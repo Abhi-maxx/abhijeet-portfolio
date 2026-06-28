@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhijeet Divekar — Full Stack Developer</title>
+<meta name="description" content="Abhijeet Divekar — Full Stack Developer specializing in Angular, ASP.NET Core, SQL Server, and Azure. Building reliable, scalable web applications.">
+
+<!-- Open Graph / Social Preview -->
+<meta property="og:title" content="Abhijeet Divekar — Full Stack Developer">
+<meta property="og:description" content="Building reliable systems with .NET & Angular. RESTful APIs, secure CRMs, and responsive web apps.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="profile.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<header>
+  <nav>
+    <div class="logo"><span class="dot"></span>abhijeet<span style="color:var(--text-dim)">.dev</span></div>
+
+    <div class="navlinks" id="navLinks">
+      <a href="#about"><span class="num">00.</span>About</a>
+      <a href="#skills"><span class="num">01.</span>Skills</a>
+      <a href="#experience"><span class="num">02.</span>Experience</a>
+      <a href="#projects"><span class="num">03.</span>Projects</a>
+      <a href="#contact"><span class="num">04.</span>Contact</a>
+      <a href="resume.pdf" download class="resume-link"><span class="num">05.</span>Resume ↓</a>
+    </div>
+
+    <button class="navtoggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none;padding-top:90px;">
+    <div class="glow-orb"></div>
+    <div class="terminal">
+      <div class="term-bar">
+        <span class="term-dot t1"></span><span class="term-dot t2"></span><span class="term-dot t3"></span>
+        <span class="term-title">developer.api — zsh</span>
+      </div>
+      <div class="term-body" id="termBody"></div>
+    </div>
+
+    <div class="hero-side">
+      <div class="profile-pic-wrap">
+        <img src="profile.jpg" alt="Abhijeet Divekar" class="profile-pic" onerror="this.style.display='none'">
+      </div>
+      <div class="eyebrow">FULL STACK DEVELOPER</div>
+      <h1 class="title">Building reliable systems<br>with <span class="accent">.NET</span> &amp; <span class="accent">Angular</span>.</h1>
+      <p class="lead">I design RESTful APIs, secure multi-tenant CRMs, and responsive Angular interfaces — backed by SQL Server and deployed on Microsoft Azure.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contact">Get in touch →</a>
+        <a class="btn btn-ghost" href="#projects">View projects</a>
+        <a class="btn btn-ghost" href="resume.pdf" download>Download CV ↓</a>
+      </div>
+      <div class="quickstats">
+        <div class="qs"><div class="val">1.9+</div><div class="lbl">yrs experience</div></div>
+        <div class="qs"><div class="val">140+</div><div class="lbl">orgs served (CRM)</div></div>
+        <div class="qs"><div class="val">~25%</div><div class="lbl">API perf. gain</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <div class="sec-head">
+      <span class="sec-tag">00</span>
+      <h2 class="sec-title">whoami</h2>
+    </div>
+    <div class="about-grid">
+      <p class="about-text">I'm a Full Stack Developer with 1.9+ years building production web apps on <strong>Angular</strong> and <strong>ASP.NET Core</strong>. I've shipped RBAC systems for a 140+ org multi-tenant CRM, optimized SQL Server queries for ~25% faster APIs, and worked hands-on with Azure Functions and Cosmos DB for serverless, distributed workloads. I care about clean architecture, readable code, and APIs that just work.</p>
+      <div class="bars">
+        <div class="bar-row"><span>Angular / TypeScript</span><div class="bar"><div class="bar-fill" data-pct="88"></div></div></div>
+        <div class="bar-row"><span>ASP.NET Core / C#</span><div class="bar"><div class="bar-fill" data-pct="90"></div></div></div>
+        <div class="bar-row"><span>SQL Server</span><div class="bar"><div class="bar-fill" data-pct="85"></div></div></div>
+        <div class="bar-row"><span>Azure (Functions / Cosmos DB)</span><div class="bar"><div class="bar-fill" data-pct="75"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="reveal">
+    <div class="sec-head">
+      <span class="sec-tag">01</span>
+      <h2 class="sec-title">Skills, served as endpoints</h2>
+    </div>
+    <div class="endpoints">
+      <div class="endpoint">
+        <div class="ep-head"><span class="verb get">GET</span><span class="ep-path">/skills/frontend</span><span class="ep-status">200 OK</span></div>
+        <div class="ep-tags"><span>Angular 14+</span><span>TypeScript</span><span>RxJS</span><span>HTML5/CSS3</span><span>Bootstrap</span><span>Ionic</span><span>jQuery</span></div>
+      </div>
+      <div class="endpoint">
+        <div class="ep-head"><span class="verb get">GET</span><span class="ep-path">/skills/backend</span><span class="ep-status">200 OK</span></div>
+        <div class="ep-tags"><span>C#</span><span>ASP.NET Core Web API</span><span>ASP.NET MVC</span><span>EF Core</span><span>LINQ</span><span>ADO.NET</span><span>JWT</span></div>
+      </div>
+      <div class="endpoint">
+        <div class="ep-head"><span class="verb get">GET</span><span class="ep-path">/skills/cloud</span><span class="ep-status">200 OK</span></div>
+        <div class="ep-tags"><span>Azure App Service</span><span>Azure Functions</span><span>Cosmos DB</span></div>
+      </div>
+      <div class="endpoint">
+        <div class="ep-head"><span class="verb get">GET</span><span class="ep-path">/skills/data</span><span class="ep-status">200 OK</span></div>
+        <div class="ep-tags"><span>SQL Server</span><span>Stored Procedures</span><span>Indexing</span><span>Query Tuning</span></div>
+      </div>
+      <div class="endpoint">
+        <div class="ep-head"><span class="verb post">POST</span><span class="ep-path">/skills/architecture</span><span class="ep-status">201 Created</span></div>
+        <div class="ep-tags"><span>Layered Architecture</span><span>Repository Pattern</span><span>DI</span><span>SOLID</span><span>OOP</span></div>
+      </div>
+      <div class="endpoint">
+        <div class="ep-head"><span class="verb get">GET</span><span class="ep-path">/skills/tools</span><span class="ep-status">200 OK</span></div>
+        <div class="ep-tags"><span>Git</span><span>Visual Studio</span><span>Swagger</span><span>Postman</span><span>SSMS</span><span>Agile/Scrum</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="reveal">
+    <div class="sec-head">
+      <span class="sec-tag">02</span>
+      <h2 class="sec-title">Experience trace</h2>
+    </div>
+    <div class="trace">
+      <div class="job">
+        <div class="job-head">
+          <div><span class="job-role">Full Stack Developer</span> · <span class="job-co">Reymould Technology Solutions Pvt. Ltd.</span></div>
+          <div class="job-time">Mar 2026 — Present</div>
+        </div>
+        <div class="job-stack">Project: TripMeld CRM [ONGOING] · Angular · ASP.NET Core Web API · Azure Functions · Cosmos DB</div>
+        <ul>
+          <li>Built Client Super Admin and Reporting Manager hierarchy modules with RBAC for a multi-tenant CRM serving 140+ organizations.</li>
+          <li>Built and integrated RESTful APIs with Angular SPA components for dynamic lead management and itinerary workflows.</li>
+          <li>Implemented Account Status toggle for real-time login access, enforcing authorization at API and UI layers.</li>
+          <li>Designed data models on Cosmos DB with serverless logic via Azure Functions for scalable, distributed operations.</li>
+          <li>Tested REST endpoints with Postman; participated in Agile/Scrum sprints, stand-ups, and code reviews.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="job-head">
+          <div><span class="job-role">Software Developer</span> · <span class="job-co">Gaya Software and Technology</span></div>
+          <div class="job-time">Aug 2024 — Feb 2026</div>
+        </div>
+        <div class="job-stack">Angular · ASP.NET Core · MVC · ADO.NET · SQL Server</div>
+        <ul>
+          <li>Developed responsive Angular UI integrated with ASP.NET Core Web APIs for client-facing applications using MVC, Bootstrap, jQuery.</li>
+          <li>Implemented JWT authentication and RBAC for secure, granular access across multiple modules.</li>
+          <li>Built data access modules with ADO.NET and stored procedures for high-performance database operations.</li>
+          <li>Optimized SQL Server queries, indexes, and stored procedures — improved API response time by ~25%.</li>
+          <li>Implemented centralized exception-handling middleware and structured request/response models.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="reveal">
+    <div class="sec-head">
+      <span class="sec-tag">03</span>
+      <h2 class="sec-title">Projects</h2>
+    </div>
+    <div class="projects">
+      <div class="card">
+        <div class="card-top"><h3>GST Society 360</h3><span class="role">Team Member</span></div>
+        <p>Accountant and Worker Payment modules for end-to-end financial management. Integrated Razorpay/UPI with automated receipt generation, plus structured credit/debit audit logging — cut manual accounting effort by ~40%.</p>
+        <div class="stack"><span>ASP.NET MVC</span><span>C#</span><span>SQL Server</span><span>ADO.NET</span><span>Razorpay API</span></div>
+        <div class="card-links">
+          <a href="#" class="card-link" onclick="return false;">View Code</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-top"><h3>Grow Mind — LMS</h3><span class="role">Team Member</span></div>
+        <p>Dynamic Angular UI for course and user management, with Reactive Forms, pagination and filtering for large datasets. Secure role-based content access via EF Core (Database First) and async/await for responsiveness.</p>
+        <div class="stack"><span>Angular</span><span>ASP.NET Core Web API</span><span>EF Core</span><span>SQL Server</span></div>
+        <div class="card-links">
+          <a href="#" class="card-link" onclick="return false;">View Code</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-top"><h3>HR Horizon</h3><span class="role">Team Member</span></div>
+        <p>Desktop HR &amp; recruitment application with ADO.NET data access and SQL Server stored procedures. Built employee management, recruitment workflows, RBAC, and event management features.</p>
+        <div class="stack"><span>C#</span><span>WinForms</span><span>ADO.NET</span><span>SQL Server</span></div>
+        <div class="card-links">
+          <a href="#" class="card-link" onclick="return false;">View Code</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-top"><h3>TripMeld CRM</h3><span class="role">Ongoing</span></div>
+        <p>Multi-tenant CRM platform for 140+ organizations — hierarchical RBAC, lead management, itinerary workflows, and serverless data operations on Azure.</p>
+        <div class="stack"><span>Angular</span><span>Azure Functions</span><span>Cosmos DB</span></div>
+        <div class="card-links">
+          <a href="#" class="card-link" onclick="return false;">Private Repo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="reveal">
+    <div class="sec-head">
+      <span class="sec-tag">04</span>
+      <h2 class="sec-title">Education</h2>
+    </div>
+    <div class="edu-row">
+      <div>
+        <h3>Bachelor of Computer Science</h3>
+        <div class="sub">Savitribai Phule Pune University (SPPU)</div>
+      </div>
+      <div class="badge">First Class · 2024</div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact" class="reveal">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <div class="eyebrow">05 · LET'S CONNECT</div>
+        <h2>Open to new roles.</h2>
+      </div>
+      <div class="links">
+        <a href="mailto:abhijeetdivekar744@gmail.com">abhijeetdivekar744@gmail.com</a>
+        <a href="tel:+917620649170">+91 76206 49170</a>
+        <a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/abhijeet-divekar-b109053a1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <form id="contactForm" class="contact-form">
+      <div class="form-row">
+        <input type="text" id="cf-name" placeholder="Your name" required>
+        <input type="email" id="cf-email" placeholder="Your email" required>
+      </div>
+      <textarea id="cf-message" placeholder="What do you want to build?" rows="4" required></textarea>
+      <button type="submit" class="btn btn-primary" style="width:fit-content;">Send message →</button>
+    </form>
+    <div class="copyright">© 2026 Abhijeet Divekar — built with HTML, CSS &amp; vanilla JS.</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
