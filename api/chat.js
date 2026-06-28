@@ -1,21 +1,21 @@
 // api/chat.js
 // Vercel Serverless Function — powers the Interactive Terminal + AI Job Match Score
-// Uses Google Gemini API (FREE tier — no credit card required)
-// Get your free key at: https://aistudio.google.com/app/apikey
+// Uses Groq API (FREE tier — no credit card required, very reliable)
+// Get your free key at: https://console.groq.com/keys
 
 const RESUME_CONTEXT = `
 You are an AI assistant embedded in Abhijeet Divekar's developer portfolio website.
 You speak AS Abhijeet's portfolio assistant — confident, concise, slightly witty, dev-terminal tone.
-Never break character. Never say you are Gemini or an AI model. If asked who you are, say you're
+Never break character. Never say what AI model you are. If asked who you are, say you're
 "Abhijeet's portfolio terminal assistant."
 
 ABOUT ABHIJEET DIVEKAR:
 - Role: Full Stack Developer, 1.9+ years experience
-- Current: Full Stack Developer at Reymould Technology Solutions Pvt. Ltd. (Mar 2026–Present)
+- Current: Full Stack Developer at Reymould Technology Solutions Pvt. Ltd. (Mar 2026-Present)
   Working on TripMeld CRM: multi-tenant CRM for 140+ organizations, hierarchical RBAC
   (Client Super Admin, Reporting Manager), Angular + ASP.NET Core Web API, Azure Functions,
   Cosmos DB, Account Status toggle for real-time access control, Postman testing, Agile/Scrum.
-- Previous: Software Developer at Gaya Software and Technology (Aug 2024–Feb 2026)
+- Previous: Software Developer at Gaya Software and Technology (Aug 2024-Feb 2026)
   Angular UI + ASP.NET Core Web APIs, MVC, Bootstrap, jQuery, JWT auth + RBAC,
   ADO.NET data access with stored procedures, optimized SQL Server queries/indexes
   improving API response time by ~25%, centralized exception-handling middleware.
@@ -66,7 +66,7 @@ no markdown fences, no extra text, nothing before or after the JSON:
 Be honest and specific — don't inflate the score. Base it strictly on the resume context provided.
 `;
 
-const GEMINI_MODEL = "gemini-2.0-flash";
+const GROQ_MODEL = "llama-3.3-70b-versatile";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -82,7 +82,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Input too long" });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: "Server not configured" });
   }
@@ -102,37 +102,31 @@ export default async function handler(req, res) {
       maxTokens = 300;
     }
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
-
-    const response = await fetch(url, {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
       body: JSON.stringify({
-        system_instruction: {
-          parts: [{ text: systemPrompt }],
-        },
-        contents: [
-          {
-            role: "user",
-            parts: [{ text: userMessage }],
-          },
+        model: GROQ_MODEL,
+        max_tokens: maxTokens,
+        temperature: 0.7,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userMessage },
         ],
-        generationConfig: {
-          maxOutputTokens: maxTokens,
-          temperature: 0.7,
-        },
       }),
     });
 
     if (!response.ok) {
       const errText = await response.text();
-      console.error("Gemini API error:", errText);
+      console.error("Groq API error:", errText);
       return res.status(502).json({ error: "AI service error" });
     }
 
     const data = await response.json();
-    const replyText =
-      data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "";
+    const replyText = data.choices?.[0]?.message?.content?.trim() || "";
 
     if (!replyText) {
       return res.status(502).json({ error: "Empty AI response" });
