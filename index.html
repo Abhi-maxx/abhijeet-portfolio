@@ -32,6 +32,7 @@
       <a href="#skills"><span class="num">01.</span>Skills</a>
       <a href="#experience"><span class="num">02.</span>Experience</a>
       <a href="#projects"><span class="num">03.</span>Projects</a>
+      <a href="#jobmatch"><span class="num">★</span>AI Match</a>
       <a href="#contact"><span class="num">04.</span>Contact</a>
       <a href="resume.pdf" download class="resume-link"><span class="num">05.</span>Resume ↓</a>
     </div>
@@ -51,7 +52,12 @@
         <span class="term-title">developer.api — zsh</span>
       </div>
       <div class="term-body" id="termBody"></div>
+      <div class="term-input-row" id="termInputRow" style="display:none;">
+        <span class="prompt-sym">➜</span>
+        <input type="text" id="termInput" class="term-input" placeholder="try: skills, experience, projects, or ask me anything..." autocomplete="off">
+      </div>
     </div>
+    <div class="term-hint" id="termHint" style="display:none;">⚡ AI-powered — try asking "what's his strongest skill?" or "tell me about TripMeld"</div>
 
     <div class="hero-side">
       <div class="profile-pic-wrap">
@@ -219,6 +225,20 @@
     </div>
   </section>
 
+  <!-- AI JOB MATCH -->
+  <section id="jobmatch" class="reveal">
+    <div class="sec-head">
+      <span class="sec-tag">★</span>
+      <h2 class="sec-title">AI Job Match Score</h2>
+    </div>
+    <p class="jm-intro">Hiring for a role? Paste the job description below — AI compares it against Abhijeet's real skills &amp; experience and scores the fit.</p>
+    <div class="jm-box">
+      <textarea id="jmInput" placeholder="Paste a job description here..." rows="6"></textarea>
+      <button id="jmBtn" class="btn btn-primary" style="width:fit-content;">Calculate Match →</button>
+      <div id="jmResult" class="jm-result" style="display:none;"></div>
+    </div>
+  </section>
+
 </main>
 
 <footer id="contact" class="reveal">
@@ -231,7 +251,7 @@
       <div class="links">
         <a href="mailto:abhijeetdivekar744@gmail.com">abhijeetdivekar744@gmail.com</a>
         <a href="tel:+917620649170">+91 76206 49170</a>
-        <a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://github.com/Abhi-maxx" target="_blank" rel="noopener">GitHub ↗</a>
         <a href="https://www.linkedin.com/in/abhijeet-divekar-b109053a1/" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </div>

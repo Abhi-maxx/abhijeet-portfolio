@@ -18,6 +18,13 @@
       cur.innerHTML = `<span class="prompt-sym">➜</span> <span class="cursor"></span>`;
       cur.className = 'line';
       termBody.appendChild(cur);
+      // reveal interactive input after scripted intro finishes
+      const inputRow = document.getElementById('termInputRow');
+      const hint = document.getElementById('termHint');
+      if(inputRow) inputRow.style.display = 'flex';
+      if(hint) hint.style.display = 'block';
+      const termInput = document.getElementById('termInput');
+      if(termInput) setTimeout(()=>termInput.focus(), 200);
       return;
     }
     const lineObj = lines[li];
@@ -88,11 +95,119 @@
       navLinks.classList.toggle('open');
       navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
     });
-    // close menu when a link is clicked
     navLinks.querySelectorAll('a').forEach(link=>{
       link.addEventListener('click', ()=>{
         navLinks.classList.remove('open');
         navToggle.textContent = '☰';
       });
+    });
+  }
+
+  // ===== INTERACTIVE AI TERMINAL =====
+  const termInput = document.getElementById('termInput');
+  if(termInput){
+    termInput.addEventListener('keydown', async (e)=>{
+      if(e.key !== 'Enter') return;
+      const value = termInput.value.trim();
+      if(!value) return;
+      termInput.value = '';
+      termInput.disabled = true;
+
+      // echo user line
+      const userLine = document.createElement('div');
+      userLine.className = 'line term-line-user';
+      userLine.innerHTML = `<span class="prompt-sym">➜</span> ${escapeHtml(value)}`;
+      termBody.appendChild(userLine);
+
+      // loading line
+      const loadingLine = document.createElement('div');
+      loadingLine.className = 'line term-line-loading';
+      loadingLine.textContent = 'thinking...';
+      termBody.appendChild(loadingLine);
+      termBody.scrollTop = termBody.scrollHeight;
+
+      try{
+        const res = await fetch('/api/chat', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ mode:'terminal', input: value })
+        });
+        const data = await res.json();
+        loadingLine.remove();
+        const replyLine = document.createElement('div');
+        if(!res.ok || data.error){
+          replyLine.className = 'line term-line-error';
+          replyLine.textContent = 'Error: ' + (data.error || 'something went wrong');
+        } else {
+          replyLine.className = 'line term-line-ai';
+          replyLine.textContent = data.reply;
+        }
+        termBody.appendChild(replyLine);
+      } catch(err){
+        loadingLine.remove();
+        const errLine = document.createElement('div');
+        errLine.className = 'line term-line-error';
+        errLine.textContent = 'Connection error — try again.';
+        termBody.appendChild(errLine);
+      }
+
+      termInput.disabled = false;
+      termInput.focus();
+      termBody.scrollTop = termBody.scrollHeight;
+    });
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  // ===== AI JOB MATCH SCORE =====
+  const jmBtn = document.getElementById('jmBtn');
+  const jmInput = document.getElementById('jmInput');
+  const jmResult = document.getElementById('jmResult');
+
+  if(jmBtn){
+    jmBtn.addEventListener('click', async ()=>{
+      const jd = jmInput.value.trim();
+      if(!jd){
+        jmInput.focus();
+        return;
+      }
+      jmBtn.disabled = true;
+      const originalText = jmBtn.textContent;
+      jmBtn.textContent = 'Analyzing...';
+      jmResult.style.display = 'block';
+      jmResult.innerHTML = `<div class="term-line-loading" style="font-family:'JetBrains Mono',monospace;">Comparing job description against resume...</div>`;
+
+      try{
+        const res = await fetch('/api/chat', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ mode:'jobmatch', input: jd })
+        });
+        const data = await res.json();
+
+        if(!res.ok || data.error){
+          jmResult.innerHTML = `<div class="jm-error">Error: ${escapeHtml(data.error || 'something went wrong')}</div>`;
+        } else {
+          const matchesHtml = (data.matches || []).map(m=>`<li>${escapeHtml(m)}</li>`).join('');
+          const gapsHtml = (data.gaps || []).map(g=>`<li>${escapeHtml(g)}</li>`).join('');
+          jmResult.innerHTML = `
+            <div class="jm-score-row">
+              <div class="jm-score-circle">${data.score}%</div>
+              <div class="jm-verdict">${escapeHtml(data.verdict || '')}</div>
+            </div>
+            ${matchesHtml ? `<div><div class="jm-list-title">Matches</div><ul class="jm-list matches">${matchesHtml}</ul></div>` : ''}
+            ${gapsHtml ? `<div><div class="jm-list-title">Gaps</div><ul class="jm-list gaps">${gapsHtml}</ul></div>` : ''}
+          `;
+        }
+      } catch(err){
+        jmResult.innerHTML = `<div class="jm-error">Connection error — try again.</div>`;
+      }
+
+      jmBtn.disabled = false;
+      jmBtn.textContent = originalText;
     });
   }
